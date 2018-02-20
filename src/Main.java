@@ -20,11 +20,10 @@ public class Main {
             else return o1.compareTo(o2);
         }));
 
-        TreeMap<Character, List<String>> treeMap = new TreeMap<>();
-        treeMap.putAll(groupedMap);
-
-        treeMap.forEach((k, v) -> {
-            if (v.size() > 1)System.out.format("First character - %s: contains - %s\n", k, v);
-        });
+        groupedMap.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(k -> k.getKey()))
+                .filter(v -> v.getValue().size() > 1)
+                .forEach(System.out::println);
     }
 }
